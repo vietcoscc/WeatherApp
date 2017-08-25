@@ -5,5 +5,5 @@ package com.example.viet.weatherapp.view;
  */
 
 public interface MainView {
-    void displayResult();
+    void displayResult(String result);
 }

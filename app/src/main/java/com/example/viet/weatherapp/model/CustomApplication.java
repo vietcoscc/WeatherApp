@@ -13,6 +13,8 @@ import com.example.viet.weatherapp.model.module.NetModule;
 public class CustomApplication extends Application {
     public static final String BASE_URL = "http://api.openweathermap.org/";
     public static final String APP_ID = "e1fb2a9813d1bc907e9d15fb26ffdbf0";
+    public static final String LANG = "vi";
+
     private NetComponent mNetComponent;
 
     @Override

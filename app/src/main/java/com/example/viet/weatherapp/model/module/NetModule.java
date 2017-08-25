@@ -13,10 +13,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 @Singleton
 public class NetModule {
-    String baseUrl;
+    private String mBaseUrl;
 
     public NetModule(String baseUrl) {
-        this.baseUrl = baseUrl;
+        this.mBaseUrl = baseUrl;
     }
 
     @Provides
@@ -24,7 +24,7 @@ public class NetModule {
     Retrofit provideRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(baseUrl).build();
+                .baseUrl(mBaseUrl).build();
         return retrofit;
     }
 }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.viet.weatherapp.R;
 import com.example.viet.weatherapp.model.CustomApplication;
 import com.example.viet.weatherapp.presenter.MainPresenterImp;
+import com.roger.catloadinglibrary.CatLoadingView;
 
 import javax.inject.Inject;
 
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     Button btnCallApi;
     @BindView(R.id.tvResult)
     TextView tvResult;
-
+    CatLoadingView catLoadingView = new CatLoadingView();
     @Inject
     Retrofit retrofit;
 
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
         CustomApplication customApplication = (CustomApplication) getApplication();
         customApplication.getmNetComponent().inject(this);
         btnCallApi.setOnClickListener(this);
+
     }
 
     private void initPresenter() {
@@ -56,8 +58,10 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     }
 
     @Override
-    public void displayResult() {
-        Log.i(TAG,"displayResult");
+    public void displayResult(String result) {
+        Log.i(TAG, "displayResult");
+        tvResult.setText(result);
+        catLoadingView.dismiss();
     }
 
     @Override
@@ -65,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
         if (view.getId() == R.id.btnCallApi) {
             String city = edtCity.getText().toString();
             mMainPresenterImp.callApi(retrofit, city, APP_ID);
+            catLoadingView.show(getSupportFragmentManager(), "");
         }
     }
 }

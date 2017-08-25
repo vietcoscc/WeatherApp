@@ -70,12 +70,17 @@ public class CurrentWeather {
 
     @Override
     public String toString() {
+        String description = null;
+        for (int i = 0; i < arrWeather.size(); i++) {
+            description = description + " , " + arrWeather.get(i).toString();
+        }
         return coord.toString() + "\n"
                 + base + "\n"
                 + main.toString() + "\n"
                 + wind.toString() + "\n"
                 + clouds.toString() + "\n"
-                + sys.toString() + "\n";
+                + sys.toString() + "\n"
+                + description;
     }
 
     public Coord getCoord() {
