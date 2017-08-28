@@ -1,4 +1,7 @@
-package com.example.viet.weatherapp.model.module;
+package com.example.viet.weatherapp.di.module;
+
+import com.example.viet.weatherapp.ui.main.MainMvpView;
+import com.example.viet.weatherapp.ui.main.MainPresenter;
 
 import javax.inject.Singleton;
 
@@ -27,4 +30,5 @@ public class NetModule {
                 .baseUrl(mBaseUrl).build();
         return retrofit;
     }
+
 }

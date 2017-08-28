@@ -1,33 +1,35 @@
-package com.example.viet.weatherapp.presenter;
+package com.example.viet.weatherapp.ui.main;
 
 import android.util.Log;
 
-import com.example.viet.weatherapp.model.CurrentWeather;
-import com.example.viet.weatherapp.model.api.WeatherApi;
-import com.example.viet.weatherapp.view.MainView;
+import com.example.viet.weatherapp.api.WeatherApi;
+import com.example.viet.weatherapp.data.model.CurrentWeather;
+import com.example.viet.weatherapp.ui.main.base.BasePresenter;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-import static com.example.viet.weatherapp.model.CustomApplication.LANG;
+import static com.example.viet.weatherapp.utils.Constants.LANG;
 
 /**
  * Created by viet on 25/08/2017.
  */
 
-public class MainPresenterImp implements MainPresenter {
-    private static final String TAG = "MainPresenterImp";
-    private MainView mMainView;
+public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> implements MainMvpPresenter<V> {
+    private static final String TAG = "MainPresenter";
 
-
-    public MainPresenterImp(MainView mMainView) {
-        this.mMainView = mMainView;
+    @Inject
+    public MainPresenter() {
+        super();
     }
 
     @Override
     public void callApi(Retrofit retrofit, String city, String appId) {
+        getmMvpView().showProgress();
         Call<CurrentWeather> call = retrofit.create(WeatherApi.class).getWeather(city, appId, LANG);
         call.enqueue(new Callback<CurrentWeather>() {
             @Override
@@ -35,7 +37,8 @@ public class MainPresenterImp implements MainPresenter {
                 Log.i(TAG, response.message() + " ");
                 CurrentWeather weather = response.body();
                 Log.i(TAG, weather.toString());
-                mMainView.displayResult(weather.toString());
+                getmMvpView().displayResult(weather.toString());
+                getmMvpView().hideProgress();
             }
 
             @Override
@@ -48,4 +51,5 @@ public class MainPresenterImp implements MainPresenter {
     private float fahrenheitToCelsius(float fahreheit) {
         return (fahreheit - 32) * 5 / 9;
     }
+
 }
