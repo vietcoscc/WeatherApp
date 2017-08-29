@@ -1,11 +1,11 @@
 package com.example.viet.weatherapp.api;
 
 
-import com.example.viet.weatherapp.data.model.CurrentWeather;
+import com.example.viet.weatherapp.model.CurrentWeather;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+        import retrofit2.http.Query;
 
 /**
  * Created by viet on 25/08/2017.

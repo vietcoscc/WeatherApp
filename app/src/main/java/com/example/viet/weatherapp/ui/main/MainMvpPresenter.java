@@ -1,6 +1,6 @@
 package com.example.viet.weatherapp.ui.main;
 
-import com.example.viet.weatherapp.ui.main.base.MvpPresenter;
+import com.example.viet.weatherapp.base.MvpPresenter;
 
 import retrofit2.Retrofit;
 
@@ -9,5 +9,5 @@ import retrofit2.Retrofit;
  */
 
 public interface MainMvpPresenter<V extends MainMvpView> extends MvpPresenter<V> {
-    void callApi(Retrofit retrofit, String city, String appId);
+    void callApi( String city, String appId);
 }

@@ -1,4 +1,4 @@
-package com.example.viet.weatherapp.ui.main.base;
+package com.example.viet.weatherapp.base;
 
 /**
  * Created by viet on 28/08/2017.
@@ -6,9 +6,6 @@ package com.example.viet.weatherapp.ui.main.base;
 
 public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
     private V mMvpView;
-
-    public BasePresenter() {
-    }
 
     @Override
     public void onAttach(V MvpView) {

@@ -9,16 +9,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.viet.weatherapp.R;
-import com.example.viet.weatherapp.data.model.CustomApplication;
+import com.example.viet.weatherapp.manager.CustomApplication;
 import com.roger.catloadinglibrary.CatLoadingView;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Retrofit;
 
-import static com.example.viet.weatherapp.utils.Constants.APP_ID;
+import static com.example.viet.weatherapp.common.Constants.APP_ID;
 
 public class MainActivity extends AppCompatActivity implements MainMvpView, View.OnClickListener {
     private static final String TAG = "MainActivity";
@@ -31,8 +30,8 @@ public class MainActivity extends AppCompatActivity implements MainMvpView, View
     TextView tvResult;
     CatLoadingView catLoadingView = new CatLoadingView();
 
-    @Inject
-    Retrofit retrofit;
+//    @Inject
+//    Retrofit retrofit;
 
     @Inject
     MainPresenter<MainMvpView> mMainPresenter;
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements MainMvpView, View
         ButterKnife.bind(this);
         initViews();
         mMainPresenter.onAttach(this);
-        Log.i("MainActivity", retrofit.baseUrl().toString());
+//        Log.i("MainActivity", retrofit.baseUrl().toString());
     }
 
     private void initViews() {
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements MainMvpView, View
     public void onClick(View view) {
         if (view.getId() == R.id.btnCallApi) {
             String city = edtCity.getText().toString();
-            mMainPresenter.callApi(retrofit, city, APP_ID);
+            mMainPresenter.callApi( city, APP_ID);
             catLoadingView.show(getSupportFragmentManager(), "");
         }
     }

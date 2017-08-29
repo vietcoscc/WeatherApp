@@ -1,4 +1,4 @@
-package com.example.viet.weatherapp.ui.main.base;
+package com.example.viet.weatherapp.base;
 
 /**
  * Created by viet on 28/08/2017.

@@ -3,8 +3,8 @@ package com.example.viet.weatherapp.ui.main;
 import android.util.Log;
 
 import com.example.viet.weatherapp.api.WeatherApi;
-import com.example.viet.weatherapp.data.model.CurrentWeather;
-import com.example.viet.weatherapp.ui.main.base.BasePresenter;
+import com.example.viet.weatherapp.base.BasePresenter;
+import com.example.viet.weatherapp.model.CurrentWeather;
 
 import javax.inject.Inject;
 
@@ -13,7 +13,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-import static com.example.viet.weatherapp.utils.Constants.LANG;
+import static com.example.viet.weatherapp.common.Constants.LANG;
 
 /**
  * Created by viet on 25/08/2017.
@@ -21,16 +21,17 @@ import static com.example.viet.weatherapp.utils.Constants.LANG;
 
 public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> implements MainMvpPresenter<V> {
     private static final String TAG = "MainPresenter";
+    private Retrofit mRetrofit;
 
     @Inject
-    public MainPresenter() {
-        super();
+    public MainPresenter(Retrofit retrofit) {
+        this.mRetrofit = retrofit;
     }
 
     @Override
-    public void callApi(Retrofit retrofit, String city, String appId) {
+    public void callApi(String city, String appId) {
         getmMvpView().showProgress();
-        Call<CurrentWeather> call = retrofit.create(WeatherApi.class).getWeather(city, appId, LANG);
+        Call<CurrentWeather> call = mRetrofit.create(WeatherApi.class).getWeather(city, appId, LANG);
         call.enqueue(new Callback<CurrentWeather>() {
             @Override
             public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {

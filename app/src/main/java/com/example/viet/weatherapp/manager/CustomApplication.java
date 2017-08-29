@@ -1,4 +1,4 @@
-package com.example.viet.weatherapp.data.model;
+package com.example.viet.weatherapp.manager;
 
 import android.app.Application;
 
@@ -9,7 +9,7 @@ import com.example.viet.weatherapp.di.component.NetComponent;
 import com.example.viet.weatherapp.di.module.ActivityModule;
 import com.example.viet.weatherapp.di.module.NetModule;
 
-import static com.example.viet.weatherapp.utils.Constants.BASE_URL;
+import static com.example.viet.weatherapp.common.Constants.BASE_URL;
 
 
 /**
@@ -23,9 +23,12 @@ public class CustomApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        NetComponent component = DaggerNetComponent.builder().netModule(new NetModule(BASE_URL)).build();
+        NetComponent component = DaggerNetComponent.builder()
+                .netModule(new NetModule(BASE_URL))
+                .build();
         mActivityComponent = DaggerActivityComponent.builder()
-                .activityModule(new ActivityModule()).netComponent(component)
+                .activityModule(new ActivityModule())
+                .netComponent(component)
                 .build();
     }
 
